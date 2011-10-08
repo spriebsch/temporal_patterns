@@ -2,8 +2,8 @@
 
 class Customer
 {
-    protected $id;
-    protected $email = 'unknown';
+    private $id;
+    private $email = 'unknown';
 
     protected $logger;
 
