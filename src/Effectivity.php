@@ -19,6 +19,11 @@ class Person
         $this->addresses[] = new AddressEffectivity($address, $start);
     }
     
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+    
     public function endEffectivity(Address $address, DateTime $end)
     {
         $addressEffectivity = NULL;
@@ -45,17 +50,24 @@ class Address
     {
         $this->address = $address;
     }
+    
+    public function __toString()
+    {
+        return $this->address;
+    }
 }
 
 class AddressEffectivity
 {
+    const FOREVER = '2999-12-31';
+
     private $address;
     private $effectivityRange;
     
     public function __construct(Address $address, DateTime $start)
     {
         $this->address = $address;
-        $this->effectivityRange = new DateRange($start, new DateTime('2999-12-31'));
+        $this->effectivityRange = new DateRange($start, new DateTime(self::FOREVER));
     }
     
     public function getAddress()
@@ -63,7 +75,7 @@ class AddressEffectivity
         return $this->address;
     }
     
-    public function end(DateTime $end)
+    public function endEffectivity(DateTime $end)
     {
         $this->effictivityRange = new DateRange($this->effectivityRange->getStart(), $end);
     }
@@ -75,10 +87,9 @@ class AddressEffectivity
     
     public function isEffectiveOn(DateTime $date)
     {
-        return $this->range->includes($date);
+        return $this->effectivityRange->includes($date);
     }
 }
-
 
 class DateRange
 {
@@ -104,17 +115,35 @@ class DateRange
     public function includes(DateTime $date)
     {
         return ($date->isAfter($this->start) || $date->isEqual($this->start)) &&
-               ($date->isBefore($this->end) || $date->isEqual($this->start));
+               ($date->isBefore($this->end) || $date->isEqual($this->end));
     }
 }
 
-$address1 = new Address('the first address');
-$address2 = new Address('the second address');
-
 $person = new Person('Bob');
-$person->addAddress($address1, new DateTime('2011-01-01'));
-$person->addAddress($address2, new DateTime('2011-06-01'));
+$person->addAddress(new Address('San Francisco'), new DateTime('2011-01-01'));
 
-$person->endEffectivity($address1, new DateTime('2011-05-30'));
+print PHP_EOL . 'Bob\'s addresses in July 2011:' . PHP_EOL;
 
-var_dump($person);
+$date = new DateTime('2011-07-01');
+$addresses = $person->getAddresses();
+foreach ($addresses as $address) {
+    if ($address->isEffectiveOn($date)) {
+        print '- ' . $address->getAddress() . PHP_EOL;
+    }
+}
+
+$addresses = $person->getAddresses();
+$address = $addresses[0];
+$address->endEffectivity(new DateTime('2011-05-31'));
+
+$person->addAddress(new Address('Los Angeles'), new DateTime('2011-06-01'));
+
+print PHP_EOL . 'Bob\'s addresses in July 2011:' . PHP_EOL;
+
+$date = new DateTime('2011-07-01');
+$addresses = $person->getAddresses();
+foreach ($addresses as $address) {
+    if ($address->isEffectiveOn($date)) {
+        print '- ' . $address->getAddress() . PHP_EOL;
+    }
+}
