@@ -1,5 +1,9 @@
 <?php
 
+require __DIR__ . '/DateTime.php';
+
+use spriebsch\datetime\DateTime;
+
 class TemporalCollection
 {
     protected $items;
