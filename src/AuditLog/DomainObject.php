@@ -2,12 +2,9 @@
 
 namespace spriebsch\temporalpatterns\auditlog;
 
-use DateTime;
-
-class Person extends DomainObject implements AuditLoggerAware
+class DomainObject implements AuditLoggerAware
 {
     private $id;
-    private $email = 'unknown';
     private $auditLogger;
 
     public function __construct($id)
@@ -18,17 +15,6 @@ class Person extends DomainObject implements AuditLoggerAware
     public function acceptAuditLogger(AuditLoggerInterface $auditLogger)
     {
         $this->auditLogger = $auditLogger;
-    }
-
-    public function setEmail($email, DateTime $actualDate = NULL)
-    {
-        if ($actualDate === NULL) {
-            $actualDate = new DateTime('now');
-        }
-        
-        $this->log(new AuditLogMessage($actualDate, $this, 'email', $this->getEmail(), $email));
-        
-        $this->email = $email;
     }
     
     public function getId()
