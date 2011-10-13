@@ -22,11 +22,6 @@ class DomainObject implements AuditLoggerAware
         return $this->id;
     }
     
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
     protected function log(AuditLogMessage $message)
     {
         if ($this->auditLogger === NULL) {
