@@ -4,7 +4,7 @@ require __DIR__ . '/TemporalCollection.php';
 
 use spriebsch\datetime\DateTime;
 
-class Person
+class SnapshotPerson
 {
     private $name;
     private $email;
@@ -58,7 +58,7 @@ class PersonSnapshot
     }
 }
 
-$person = new Person('Bob');
+$person = new SnapshotPerson('Bob');
 $person->setEmail('bob@example.com', new DateTime('2011-09-01'));
 $person->setEmail('bob@bobsdomain.com', new DateTime('2011-10-01'));
 

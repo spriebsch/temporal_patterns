@@ -19,7 +19,7 @@ class PersonVersion
     }
 }
 
-class Person
+class TemporalObjectPerson
 {
     private $name;
     private $versions;
@@ -53,7 +53,7 @@ class Person
     }
 }
 
-$bob = new Person('Bob');
+$bob = new TemporalObject('Bob');
 $bob->setEmail('bob@example.com', new DateTime('2011-09-01'));
 $bob->setEmail('bob@bobsdomain.com', new DateTime('2011-10-01'));
 

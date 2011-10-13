@@ -77,7 +77,8 @@ class AddressEffectivity
     
     public function endEffectivity(DateTime $end)
     {
-        $this->effictivityRange = new DateRange($this->effectivityRange->getStart(), $end);
+//        $this->effictivityRange = new DateRange($this->effectivityRange->getStart(), $end);
+        $this->effectivityRange = new DateRange($this->effectivityRange->getStart(), $end);
     }
     
     public function setEffectivity(DateRange $range)
@@ -132,11 +133,21 @@ foreach ($addresses as $address) {
     }
 }
 
+$person->addAddress(new Address('Los Angeles'), new DateTime('2011-06-01'));
+
+print PHP_EOL . 'Bob\'s addresses in July 2011:' . PHP_EOL;
+
+$date = new DateTime('2011-07-01');
+$addresses = $person->getAddresses();
+foreach ($addresses as $address) {
+    if ($address->isEffectiveOn($date)) {
+        print '- ' . $address->getAddress() . PHP_EOL;
+    }
+}
+
 $addresses = $person->getAddresses();
 $address = $addresses[0];
 $address->endEffectivity(new DateTime('2011-05-31'));
-
-$person->addAddress(new Address('Los Angeles'), new DateTime('2011-06-01'));
 
 print PHP_EOL . 'Bob\'s addresses in July 2011:' . PHP_EOL;
 
