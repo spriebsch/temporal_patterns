@@ -1,25 +1,11 @@
 <?php
 
-require __DIR__ . '/TemporalCollection.php';
+namespace spriebsch\temporalpatterns\temporalobject;
 
-use spriebsch\datetime\DateTime;
+use DateTime;
+use spriebsch\temporalpatterns\TemporalCollection;
 
-class PersonVersion
-{
-    private $email;
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-    
-    public function getEmail()
-    {
-        return $this->email;
-    }
-}
-
-class TemporalObjectPerson
+class Person
 {
     private $name;
     private $versions;
@@ -52,12 +38,3 @@ class TemporalObjectPerson
         return clone $current;
     }
 }
-
-$bob = new TemporalObject('Bob');
-$bob->setEmail('bob@example.com', new DateTime('2011-09-01'));
-$bob->setEmail('bob@bobsdomain.com', new DateTime('2011-10-01'));
-
-print PHP_EOL . 'Sep 2011: ' . $bob->getEmail(new DateTime('2011-09-05'));
-print PHP_EOL . 'Oct 2011: ' . $bob->getEmail(new DateTime('2011-10-02'));
-
-print PHP_EOL;

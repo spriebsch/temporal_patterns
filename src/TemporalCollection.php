@@ -1,8 +1,9 @@
 <?php
 
-require __DIR__ . '/DateTime.php';
+namespace spriebsch\temporalpatterns;
 
-use spriebsch\datetime\DateTime;
+use DateTime;
+use SplObjectStorage;
 
 class TemporalCollection
 {
@@ -25,11 +26,11 @@ class TemporalCollection
 
         // sort in descending order
         usort($this->dates, function ($a, $b) {
-            if ($a->isEqual($b)) {
+            if ($a == $b) {
                 return 0;
             }
 
-            if ($a->isBefore($b)) {
+            if ($a < $b) {
                 return 1;
             }
                     
@@ -44,7 +45,7 @@ class TemporalCollection
         }
 
         foreach ($this->dates as $d) {
-            if ($date->isAfter($d) || $date->isEqual($d)) {
+            if ($date > $d || $date == $d) {
                 return $this->items[$d];
             }
         }
