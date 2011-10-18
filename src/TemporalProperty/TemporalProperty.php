@@ -38,4 +38,3 @@ print PHP_EOL . 'Oct 2011: ' . $bob->getEmail(new DateTime('2011-10-02'));
 print PHP_EOL . 'Now:      ' . $bob->getEmail() . PHP_EOL;
 
 print PHP_EOL;
-
