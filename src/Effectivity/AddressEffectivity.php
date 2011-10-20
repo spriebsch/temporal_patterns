@@ -24,7 +24,6 @@ class AddressEffectivity
     
     public function endEffectivity(DateTime $end)
     {
-//        $this->effictivityRange = new DateRange($this->effectivityRange->getStart(), $end);
         $this->effectivityRange = new DateRange($this->effectivityRange->getStart(), $end);
     }
     
