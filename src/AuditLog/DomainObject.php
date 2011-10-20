@@ -51,12 +51,12 @@ class DomainObject implements AuditLoggerAware
     {
         $this->auditLogger = $auditLogger;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     protected function log(AuditLogMessage $message)
     {
         if ($this->auditLogger === NULL) {

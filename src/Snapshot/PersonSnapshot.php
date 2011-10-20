@@ -49,12 +49,12 @@ class PersonSnapshot
         $this->date = $date;
         $this->person = $person;
     }
-    
+
     public function getName()
     {
         return $this->person->getName();
     }
-    
+
     public function getEmail()
     {
         return $this->person->getEmail($this->date);

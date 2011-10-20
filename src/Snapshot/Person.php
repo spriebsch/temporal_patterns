@@ -44,18 +44,18 @@ class Person
 {
     private $name;
     private $email;
-    
+
     public function __construct($name)
     {
         $this->name = $name;
         $this->email = new TemporalCollection();
     }
-    
+
     public function getName()
     {
         return $this->name;
     }
-    
+
     public function setEmail($email, DateTime $date = NULL)
     {
         $this->email->add($email, $date);

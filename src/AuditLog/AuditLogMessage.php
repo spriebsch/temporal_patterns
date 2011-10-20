@@ -57,7 +57,7 @@ class AuditLogMessage
         $this->oldValue = $oldValue;
         $this->newValue = $newValue;
     }
-    
+
     public function __toString()
     {
         return $this->date->format('r') . ': Changed ' . $this->attributeName .
