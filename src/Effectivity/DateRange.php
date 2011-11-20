@@ -59,7 +59,7 @@ class DateRange
     {
         return $this->end;
     }
-    
+
     public function includes(DateTime $date)
     {
         return ($date > $this->start || $date == $this->start) &&

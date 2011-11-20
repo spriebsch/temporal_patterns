@@ -48,12 +48,12 @@ class Person extends DomainObject implements AuditLoggerAware
         if ($actualDate === NULL) {
             $actualDate = new DateTime('now');
         }
-        
+
         $this->log(new AuditLogMessage($actualDate, $this, 'email', $this->getEmail(), $email));
-        
+
         $this->email = $email;
     }
-    
+
     public function getEmail()
     {
         return $this->email;

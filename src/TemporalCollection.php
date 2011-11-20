@@ -44,7 +44,7 @@ class TemporalCollection
 {
     protected $items;
     protected $dates = array();
-    
+
     public function __construct()
     {
         $this->items = new SplObjectStorage();
@@ -55,7 +55,7 @@ class TemporalCollection
         if ($date === NULL) {
             $date = new DateTime('now');
         }
-        
+
         $this->items[$date] = $item;
         $this->dates[] = $date;
 
@@ -68,13 +68,13 @@ class TemporalCollection
             if ($a < $b) {
                 return 1;
             }
-                    
+
             return -1;
         });
     }
 
     public function get(DateTime $date = NULL)
-    {    
+    {
         if ($date === NULL) {
             $date = new DateTime('now');
         }

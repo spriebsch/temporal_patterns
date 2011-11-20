@@ -45,7 +45,7 @@ class Address
     {
         $this->address = $address;
     }
-    
+
     public function __toString()
     {
         return $this->address;
